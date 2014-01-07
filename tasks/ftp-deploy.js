@@ -157,6 +157,11 @@ module.exports = function (grunt) {
     ftp.useList = true;
     toTransfer = dirParseSync(localRoot);
 
+    // setting username an password via grunt config
+    if (this.data.auth.username)
+      authVals.username = grunt.config.process(this.data.auth.username);
+    if (this.data.auth.password)
+      authVals.password = grunt.config.process(this.data.auth.password);
     // Getting all the necessary credentials before we proceed
     var needed = {properties: {}};
     if (!authVals.username) needed.properties.username = {};
